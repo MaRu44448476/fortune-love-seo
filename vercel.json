@@ -1,0 +1,6 @@
+{
+  "buildCommand": "cd fortune-love && npm run build",
+  "devCommand": "cd fortune-love && npm run dev", 
+  "installCommand": "cd fortune-love && npm install",
+  "outputDirectory": "fortune-love/.next"
+}
