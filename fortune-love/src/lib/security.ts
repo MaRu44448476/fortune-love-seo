@@ -184,7 +184,7 @@ export class SecurityAudit {
       timestamp: new Date().toISOString(),
       event,
       details,
-      ip: request?.ip || 'unknown',
+      ip: (request as any)?.ip || 'unknown',
       userAgent: request?.headers.get('user-agent') || 'unknown',
       url: request?.url || 'unknown'
     }

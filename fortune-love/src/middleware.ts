@@ -23,7 +23,7 @@ const API_LIMITS = {
 function getIP(request: NextRequest): string {
   const forwarded = request.headers.get('x-forwarded-for')
   const real = request.headers.get('x-real-ip')
-  const remote = request.ip
+  const remote = (request as any).ip
   
   if (forwarded) {
     return forwarded.split(',')[0].trim()

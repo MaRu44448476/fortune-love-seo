@@ -40,6 +40,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/stripe": "^8.0.416",
     "@vercel/analytics": "^1.4.1",
     "@vercel/speed-insights": "^1.1.0",
     "eslint": "^9",
@@ -47,7 +48,8 @@
     "next-pwa": "^5.6.0",
     "tailwindcss": "^4",
     "tsx": "^4.19.2",
-    "typescript": "^5"
+    "typescript": "^5",
+    "yocto-queue": "^1.2.1"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"

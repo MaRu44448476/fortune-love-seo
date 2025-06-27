@@ -247,7 +247,7 @@ export function generateWeeklyFortune(
   
   const currentElement = zodiacData.element
   const compatibleZodiacs = allZodiacs.filter(z => 
-    compatibleElements[currentElement].includes(weeklyFortuneData.zodiacWeekly[z].element)
+    (compatibleElements as any)[currentElement].includes(weeklyFortuneData.zodiacWeekly[z].element)
   )
   
   const bestMatchIndex = seededRandom(weekSeed + 200, 0, compatibleZodiacs.length - 1)
@@ -255,7 +255,7 @@ export function generateWeeklyFortune(
   
   const goodMatches = compatibleZodiacs.filter(z => z !== bestMatch).slice(0, 2)
   const challenges = allZodiacs.filter(z => 
-    !compatibleElements[currentElement].includes(weeklyFortuneData.zodiacWeekly[z].element)
+    !(compatibleElements as any)[currentElement].includes(weeklyFortuneData.zodiacWeekly[z].element)
   ).slice(0, 2)
   
   return {

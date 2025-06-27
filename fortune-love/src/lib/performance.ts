@@ -61,7 +61,7 @@ export class PerformanceMonitor {
     // First Input Delay (deprecated, replaced with INP)
     const fidObserver = new PerformanceObserver((list) => {
       list.getEntries().forEach((entry) => {
-        console.log('FID:', entry.processingStart - entry.startTime)
+        console.log('FID:', (entry as any).processingStart - entry.startTime)
       })
     })
     fidObserver.observe({ type: 'first-input', buffered: true })
@@ -183,7 +183,7 @@ export const cleanup = {
   
   clearTimers: () => {
     // Clear any running timers
-    const highestTimeoutId = setTimeout(() => {}, 0)
+    const highestTimeoutId = setTimeout(() => {}, 0) as any
     for (let i = 0; i < highestTimeoutId; i++) {
       clearTimeout(i)
     }

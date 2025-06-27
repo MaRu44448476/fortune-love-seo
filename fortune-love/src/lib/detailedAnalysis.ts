@@ -168,7 +168,7 @@ export function generateDetailedAnalysis(
   
   const currentElement = zodiacElements[zodiac as keyof typeof zodiacElements]
   const compatibleZodiacs = Object.entries(zodiacElements)
-    .filter(([_, element]) => compatibleElements[currentElement].includes(element))
+    .filter(([_, element]) => (compatibleElements as any)[currentElement].includes(element))
     .map(([zodiac, _]) => zodiac)
     .slice(0, 3)
   

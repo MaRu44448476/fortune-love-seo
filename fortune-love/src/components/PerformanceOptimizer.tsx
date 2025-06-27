@@ -66,9 +66,4 @@ function sendToAnalytics(metric: {
   }
 }
 
-// TypeScript の型定義
-declare global {
-  interface Window {
-    gtag: (...args: unknown[]) => void
-  }
-}
+// TypeScript の型定義は既存のものを使用

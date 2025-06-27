@@ -76,13 +76,13 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
       },
       data: {
         stripeSubId: subscription.id,
-        currentPeriodEnd: new Date(subscription.current_period_end * 1000),
+        currentPeriodEnd: new Date((subscription as any).current_period_end * 1000),
         status: subscription.status,
       },
     })
 
     // ユーザーのプレミアムステータスを更新
-    const premiumUntil = new Date(subscription.current_period_end * 1000)
+    const premiumUntil = new Date((subscription as any).current_period_end * 1000)
     await prisma.user.update({
       where: { id: userId },
       data: {
@@ -110,7 +110,7 @@ async function handleSubscriptionCreated(subscription: Stripe.Subscription) {
         stripeSubId: subscription.id,
       },
       update: {
-        currentPeriodEnd: new Date(subscription.current_period_end * 1000),
+        currentPeriodEnd: new Date((subscription as any).current_period_end * 1000),
         status: subscription.status,
       },
       create: {
@@ -118,7 +118,7 @@ async function handleSubscriptionCreated(subscription: Stripe.Subscription) {
         stripeCustomerId: subscription.customer as string,
         stripePriceId: subscription.items.data[0].price.id,
         stripeSubId: subscription.id,
-        currentPeriodEnd: new Date(subscription.current_period_end * 1000),
+        currentPeriodEnd: new Date((subscription as any).current_period_end * 1000),
         status: subscription.status,
       },
     })
@@ -144,14 +144,14 @@ async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {
     await prisma.subscription.update({
       where: { stripeSubId: subscription.id },
       data: {
-        currentPeriodEnd: new Date(subscription.current_period_end * 1000),
+        currentPeriodEnd: new Date((subscription as any).current_period_end * 1000),
         status: subscription.status,
       },
     })
 
     // ユーザーのプレミアムステータスを更新
     const isPremiumActive = subscription.status === 'active' || subscription.status === 'trialing'
-    const premiumUntil = isPremiumActive ? new Date(subscription.current_period_end * 1000) : null
+    const premiumUntil = isPremiumActive ? new Date((subscription as any).current_period_end * 1000) : null
 
     await prisma.user.update({
       where: { id: dbSubscription.userId },
@@ -201,7 +201,7 @@ async function handleSubscriptionDeleted(subscription: Stripe.Subscription) {
 }
 
 async function handleInvoicePaid(invoice: Stripe.Invoice) {
-  const subscriptionId = invoice.subscription as string
+  const subscriptionId = (invoice as any).subscription as string
   if (!subscriptionId) return
 
   try {
@@ -220,7 +220,7 @@ async function handleInvoicePaid(invoice: Stripe.Invoice) {
     await prisma.subscription.update({
       where: { stripeSubId: subscriptionId },
       data: {
-        currentPeriodEnd: new Date(subscription.current_period_end * 1000),
+        currentPeriodEnd: new Date((subscription as any).current_period_end * 1000),
         status: subscription.status,
       },
     })
@@ -229,7 +229,7 @@ async function handleInvoicePaid(invoice: Stripe.Invoice) {
       where: { id: dbSubscription.userId },
       data: {
         isPremium: true,
-        premiumUntil: new Date(subscription.current_period_end * 1000),
+        premiumUntil: new Date((subscription as any).current_period_end * 1000),
       },
     })
 
@@ -240,7 +240,7 @@ async function handleInvoicePaid(invoice: Stripe.Invoice) {
 }
 
 async function handleInvoiceFailed(invoice: Stripe.Invoice) {
-  const subscriptionId = invoice.subscription as string
+  const subscriptionId = (invoice as any).subscription as string
   if (!subscriptionId) return
 
   try {
