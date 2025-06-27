@@ -1,0 +1,86 @@
+[
+  {
+    "content": "技術スタックの提案と説明",
+    "status": "completed",
+    "priority": "high",
+    "id": "1"
+  },
+  {
+    "content": "占い結果生成システムの設計説明",
+    "status": "completed",
+    "priority": "high",
+    "id": "2"
+  },
+  {
+    "content": "日替わり機能の仕組み設計",
+    "status": "completed",
+    "priority": "high",
+    "id": "3"
+  },
+  {
+    "content": "有料機能の具体案提示",
+    "status": "completed",
+    "priority": "high",
+    "id": "4"
+  },
+  {
+    "content": "プロジェクト構成の設計",
+    "status": "completed",
+    "priority": "high",
+    "id": "5"
+  },
+  {
+    "content": "フロントエンド実装（UI/UX）",
+    "status": "completed",
+    "priority": "high",
+    "id": "6"
+  },
+  {
+    "content": "Prismaスキーマ設計とDBモデル作成",
+    "status": "completed",
+    "priority": "high",
+    "id": "7"
+  },
+  {
+    "content": "NextAuth.js認証設定",
+    "status": "completed",
+    "priority": "high",
+    "id": "8"
+  },
+  {
+    "content": "会員登録・ログインUI作成",
+    "status": "completed",
+    "priority": "high",
+    "id": "9"
+  },
+  {
+    "content": "マイページ機能実装",
+    "status": "completed",
+    "priority": "high",
+    "id": "10"
+  },
+  {
+    "content": "占い履歴保存API作成",
+    "status": "completed",
+    "priority": "medium",
+    "id": "11"
+  },
+  {
+    "content": "プレミアム機能実装",
+    "status": "pending",
+    "priority": "medium",
+    "id": "12"
+  },
+  {
+    "content": "SEO最適化、PWA対応",
+    "status": "pending",
+    "priority": "low",
+    "id": "13"
+  },
+  {
+    "content": "Vercelデプロイ設定",
+    "status": "pending",
+    "priority": "medium",
+    "id": "14"
+  }
+]

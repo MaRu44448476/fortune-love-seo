@@ -1,0 +1,26 @@
+[
+  {
+    "content": "GitHubリポジトリ作成と初期設定",
+    "status": "completed",
+    "priority": "high",
+    "id": "1"
+  },
+  {
+    "content": "プロジェクト文書の作成（README、要件定義など）",
+    "status": "completed",
+    "priority": "high",
+    "id": "2"
+  },
+  {
+    "content": "相談ログと進捗記録の整理",
+    "status": "completed",
+    "priority": "medium",
+    "id": "3"
+  },
+  {
+    "content": "GitHubへのプッシュ完了",
+    "status": "completed",
+    "priority": "high",
+    "id": "4"
+  }
+]

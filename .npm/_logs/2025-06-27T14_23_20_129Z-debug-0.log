@@ -1,0 +1,19 @@
+0 verbose cli /usr/bin/node /usr/bin/npm
+1 info using npm@10.8.2
+2 info using node@v18.20.6
+3 silly config load:file:/usr/lib/node_modules/npm/npmrc
+4 silly config load:file:/home/wiwcw/fortune-love/.npmrc
+5 silly config load:file:/home/wiwcw/.npmrc
+6 silly config load:file:/home/wiwcw/.npm-global/etc/npmrc
+7 verbose title npm run build --no-lint
+8 verbose argv "run" "build" "--" "--no-lint"
+9 verbose logfile logs-max:10 dir:/home/wiwcw/.npm/_logs/2025-06-27T14_23_20_129Z-
+10 verbose logfile /home/wiwcw/.npm/_logs/2025-06-27T14_23_20_129Z-debug-0.log
+11 silly logfile start cleaning logs, removing 1 files
+12 silly logfile done cleaning log files
+13 verbose cwd /home/wiwcw/fortune-love
+14 verbose os Linux 6.6.87.2-microsoft-standard-WSL2
+15 verbose node v18.20.6
+16 verbose npm  v10.8.2
+17 verbose exit 1
+18 verbose code 1

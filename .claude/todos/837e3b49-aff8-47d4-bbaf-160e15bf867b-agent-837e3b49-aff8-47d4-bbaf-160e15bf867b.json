@@ -1,0 +1,38 @@
+[
+  {
+    "content": "プレミアム機能完成に伴う進捗記録更新",
+    "status": "completed",
+    "priority": "high",
+    "id": "premium_completion_update"
+  },
+  {
+    "content": "README.mdにプレミアム機能完成を反映",
+    "status": "completed",
+    "priority": "high",
+    "id": "readme_premium_update"
+  },
+  {
+    "content": "相談ログにプレミアム機能完成報告を記録",
+    "status": "completed",
+    "priority": "high",
+    "id": "consultation_log_update"
+  },
+  {
+    "content": "最終フェーズ（残り5%）の計画策定",
+    "status": "completed",
+    "priority": "high",
+    "id": "final_phase_planning"
+  },
+  {
+    "content": "次の実装フェーズ（SEO最適化）用プロンプト準備",
+    "status": "completed",
+    "priority": "medium",
+    "id": "seo_prompt_preparation"
+  },
+  {
+    "content": "デプロイ・運用準備フェーズ用プロンプト作成",
+    "status": "pending",
+    "priority": "medium",
+    "id": "deploy_prompt_preparation"
+  }
+]
