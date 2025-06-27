@@ -1,4 +1,4 @@
-# 🔮 恋愛占いサイト - Fortune Love
+# 🔮 恋愛占いサイト - Fortune Love (Deploy Test)
 
 血液型×星座×干支による576通りの本格恋愛占いサイト
 
