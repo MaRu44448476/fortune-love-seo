@@ -1,3 +1,45 @@
+const withPWA = require('next-pwa')({
+  dest: 'public',
+  register: true,
+  skipWaiting: true,
+  runtimeCaching: [
+    {
+      urlPattern: /^https?.*/,
+      handler: 'NetworkFirst',
+      options: {
+        cacheName: 'offlineCache',
+        expiration: {
+          maxEntries: 200,
+          maxAgeSeconds: 30 * 24 * 60 * 60, // 30日
+        },
+      },
+    },
+    {
+      urlPattern: /\/api\/fortune/,
+      handler: 'StaleWhileRevalidate',
+      options: {
+        cacheName: 'fortune-api',
+        expiration: {
+          maxEntries: 100,
+          maxAgeSeconds: 60 * 60, // 1時間
+        },
+      },
+    },
+    {
+      urlPattern: /\/api\/og/,
+      handler: 'CacheFirst',
+      options: {
+        cacheName: 'og-images',
+        expiration: {
+          maxEntries: 100,
+          maxAgeSeconds: 7 * 24 * 60 * 60, // 7日間
+        },
+      },
+    },
+  ],
+  disable: process.env.NODE_ENV === 'development',
+})
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // パフォーマンス最適化設定
@@ -137,4 +179,4 @@ const nextConfig = {
   },
 }
 
-module.exports = nextConfig
+module.exports = withPWA(nextConfig)

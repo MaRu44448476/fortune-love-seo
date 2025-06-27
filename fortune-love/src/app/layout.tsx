@@ -5,6 +5,9 @@ import SessionProvider from "@/components/SessionProvider";
 import StructuredData from "@/components/StructuredData";
 import PerformanceOptimizer from "@/components/PerformanceOptimizer";
 import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { presetOGImages } from "@/lib/og-image";
 
 const geistSans = Geist({
@@ -98,7 +101,10 @@ export default function RootLayout({
         <SessionProvider>
           <PerformanceOptimizer />
           <ServiceWorkerRegistration />
+          <GoogleAnalytics />
           {children}
+          <Analytics />
+          <SpeedInsights />
         </SessionProvider>
       </body>
     </html>

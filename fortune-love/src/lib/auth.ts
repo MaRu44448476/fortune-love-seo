@@ -12,6 +12,14 @@ export const authOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      authorization: {
+        params: {
+          scope: "openid email profile",
+          prompt: "consent",
+          access_type: "offline",
+          response_type: "code"
+        },
+      },
     }),
     EmailProvider({
       server: {
@@ -23,6 +31,7 @@ export const authOptions: NextAuthOptions = {
         },
       },
       from: process.env.EMAIL_FROM,
+      maxAge: 24 * 60 * 60, // 24時間
     }),
   ],
   callbacks: {
@@ -52,9 +61,28 @@ export const authOptions: NextAuthOptions = {
   },
   session: {
     strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60, // 30日
+    updateAge: 24 * 60 * 60, // 24時間ごとに更新
+  },
+  jwt: {
+    maxAge: 30 * 24 * 60 * 60, // 30日
   },
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: '/auth/signin',
+    signUp: '/auth/signup',
+    error: '/auth/error',
   },
+  cookies: {
+    sessionToken: {
+      name: process.env.NODE_ENV === 'production' ? '__Secure-next-auth.session-token' : 'next-auth.session-token',
+      options: {
+        httpOnly: true,
+        sameSite: 'lax',
+        path: '/',
+        secure: process.env.NODE_ENV === 'production',
+      }
+    },
+  },
+  useSecureCookies: process.env.NODE_ENV === 'production',
 }
