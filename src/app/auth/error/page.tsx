@@ -2,8 +2,11 @@
 
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
-import { useEffect } from 'react'
+import { useEffect, Suspense } from 'react'
 import { trackError } from '@/lib/analytics'
+
+// 動的レンダリングを強制
+export const dynamic = 'force-dynamic'
 
 const errorMessages: Record<string, string> = {
   Configuration: 'サーバー設定に問題があります。しばらく時間をおいて再度お試しください。',
@@ -21,7 +24,7 @@ const errorMessages: Record<string, string> = {
   SessionRequired: 'このページにアクセスするにはログインが必要です。',
 }
 
-export default function AuthErrorPage() {
+function AuthErrorContent() {
   const searchParams = useSearchParams()
   const error = searchParams.get('error')
   
@@ -79,5 +82,22 @@ export default function AuthErrorPage() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function AuthErrorPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gradient-to-br from-pink-100 via-purple-50 to-indigo-100 flex items-center justify-center p-4">
+        <div className="bg-white rounded-3xl shadow-xl p-8 max-w-md w-full text-center">
+          <div className="text-6xl mb-4">⏳</div>
+          <h1 className="text-2xl font-bold text-gray-800 mb-4">
+            読み込み中...
+          </h1>
+        </div>
+      </div>
+    }>
+      <AuthErrorContent />
+    </Suspense>
   )
 }
