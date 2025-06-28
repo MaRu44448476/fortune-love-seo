@@ -1,6 +1,5 @@
 'use client'
 
-import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { useEffect, Suspense } from 'react'
 import { trackError } from '@/lib/analytics'
@@ -25,8 +24,9 @@ const errorMessages: Record<string, string> = {
 }
 
 function AuthErrorContent() {
-  const searchParams = useSearchParams()
-  const error = searchParams.get('error')
+  const error = typeof window !== 'undefined' 
+    ? new URLSearchParams(window.location.search).get('error')
+    : null
   
   useEffect(() => {
     if (error) {
