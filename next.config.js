@@ -70,6 +70,7 @@ const nextConfig = {
   // 実験的機能の有効化
   experimental: {
     optimizePackageImports: ['lucide-react', 'framer-motion'],
+    missingSuspenseWithCSRBailout: false,
   },
 
   // Turbopack設定

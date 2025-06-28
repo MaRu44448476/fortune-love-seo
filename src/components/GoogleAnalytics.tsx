@@ -2,10 +2,10 @@
 
 import Script from 'next/script'
 import { usePathname, useSearchParams } from 'next/navigation'
-import { useEffect } from 'react'
+import { useEffect, Suspense } from 'react'
 import { GA_TRACKING_ID, trackPageView, trackPerformance } from '@/lib/analytics'
 
-export default function GoogleAnalytics() {
+function GoogleAnalyticsTracker() {
   const pathname = usePathname()
   const searchParams = useSearchParams()
 
@@ -15,6 +15,11 @@ export default function GoogleAnalytics() {
     const url = pathname + searchParams.toString()
     trackPageView(url)
   }, [pathname, searchParams])
+
+  return null
+}
+
+export default function GoogleAnalytics() {
 
   useEffect(() => {
     // パフォーマンス監視を開始
@@ -27,6 +32,9 @@ export default function GoogleAnalytics() {
 
   return (
     <>
+      <Suspense fallback={null}>
+        <GoogleAnalyticsTracker />
+      </Suspense>
       <Script
         strategy="afterInteractive"
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
