@@ -66,9 +66,9 @@ export const authOptions: NextAuthOptions = {
     maxAge: 30 * 24 * 60 * 60, // 30日
   },
   secret: process.env.NEXTAUTH_SECRET,
-  pages: {
-    signIn: '/auth/signin',
-  },
+  // pages: {
+  //   signIn: '/auth/signin',
+  // },
   cookies: {
     sessionToken: {
       name: process.env.NODE_ENV === 'production' ? '__Secure-next-auth.session-token' : 'next-auth.session-token',
