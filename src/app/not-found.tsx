@@ -1,6 +1,9 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
 
+// 動的レンダリングを強制
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {
   title: 'ページが見つかりません | 恋愛占いサイト',
   description: 'お探しのページは見つかりませんでした。恋愛占いサイトのホームページから占いをお楽しみください。',

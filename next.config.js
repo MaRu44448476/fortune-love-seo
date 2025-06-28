@@ -56,6 +56,9 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   
+  // 静的生成の問題を回避
+  output: 'standalone',
+  
   // 画像最適化
   images: {
     formats: ['image/webp', 'image/avif'],
