@@ -57,7 +57,8 @@ function PremiumContent() {
 
   const handleSubscribe = async (planType: PlanType) => {
     if (!session) {
-      window.location.href = '/auth/signin'
+      // NextAuthのデフォルト認証ページを使用
+      window.location.href = '/api/auth/signin'
       return
     }
 
@@ -409,7 +410,7 @@ function PremiumContent() {
           </Link>
           {!session && (
             <Link 
-              href="/auth/signin"
+              href="/api/auth/signin"
               className="inline-block bg-white border-2 border-purple-200 text-purple-600 px-8 py-3 rounded-2xl font-semibold hover:bg-purple-50 transition-all"
             >
               ログインする

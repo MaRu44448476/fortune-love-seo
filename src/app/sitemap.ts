@@ -122,7 +122,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
-      url: `${baseUrl}/auth/signin`,
+      url: `${baseUrl}/api/auth/signin`,
       lastModified: lastWeek,
       changeFrequency: 'monthly',
       priority: 0.3,

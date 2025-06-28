@@ -86,13 +86,13 @@ export default function Header() {
             ) : (
               <div className="flex items-center gap-2">
                 <Link
-                  href="/auth/signin"
+                  href="/api/auth/signin"
                   className="px-4 py-2 text-pink-600 hover:text-pink-700 font-medium transition-colors"
                 >
                   ログイン
                 </Link>
                 <Link
-                  href="/auth/signup"
+                  href="/api/auth/signin"
                   className="px-4 py-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-full hover:shadow-lg transition-all font-medium"
                 >
                   新規登録

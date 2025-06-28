@@ -30,7 +30,7 @@ export default function ProfilePage() {
 
   useEffect(() => {
     if (status === 'unauthenticated') {
-      redirect('/auth/signin')
+      redirect('/api/auth/signin')
     }
   }, [status])
 

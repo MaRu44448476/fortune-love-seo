@@ -132,7 +132,7 @@ export default function DetailedAnalysisPage() {
                   </Link>
                 ) : error === 'ログインが必要です' ? (
                   <Link 
-                    href="/auth/signin"
+                    href="/api/auth/signin"
                     className="inline-block bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-3 rounded-2xl font-semibold hover:shadow-lg transition-all"
                   >
                     ログインする
