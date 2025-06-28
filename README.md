@@ -1,6 +1,32 @@
-# 🔮 恋愛占いサイト - Fortune Love (Deploy Test)
+# 🔮 恋愛占いサイト - Fortune Love
 
 血液型×星座×干支による576通りの本格恋愛占いサイト
+
+## 🚀 **現在のデプロイ状況**
+
+**本番URL**: https://fortune-love-jcf5763s5-marus-projects-f78c41e4.vercel.app
+
+### ✅ 実装済み機能
+- メイン占い機能（完全動作）
+- Google OAuth認証（設定済み）
+- プレミアムページ（認証済みユーザー向け）
+- データベース（Supabase設定済み）
+
+### 📋 次回作業用チェックリスト
+別PCで作業を継続する場合は、以下の設定が必要:
+
+1. **Google OAuth設定** - `docs/GOOGLE_OAUTH_SETUP.md` 参照
+2. **Stripe決済設定** - `docs/STRIPE_SETUP.md` 参照  
+3. **最終確認** - `FINAL_SETUP_CHECKLIST.md` で動作確認
+
+### 🔧 環境構築スクリプト
+```bash
+# 環境設定の確認
+./scripts/setup-env.sh
+
+# 開発環境の起動
+npm install && npm run dev
+```
 
 ## ✨ 機能概要
 
