@@ -2,13 +2,13 @@
 
 import { signIn } from "next-auth/react"
 import { useSearchParams } from 'next/navigation'
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "../../../components/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../../../components/ui/card"
 import Link from "next/link"
-import { useState } from 'react'
+import { useState, Suspense } from 'react'
 import { AlertCircle } from 'lucide-react'
 
-export default function SignInPage() {
+function SignInContent() {
   const searchParams = useSearchParams()
   const callbackUrl = searchParams.get('callbackUrl') || '/'
   const [error, setError] = useState<string | null>(null)
@@ -95,5 +95,13 @@ export default function SignInPage() {
         </CardContent>
       </Card>
     </div>
+  )
+}
+
+export default function SignInPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">読み込み中...</div>}>
+      <SignInContent />
+    </Suspense>
   )
 }
