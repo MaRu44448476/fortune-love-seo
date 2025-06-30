@@ -5,10 +5,36 @@ import { useSearchParams } from 'next/navigation'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import Link from "next/link"
+import { useState } from 'react'
+import { AlertCircle } from 'lucide-react'
 
 export default function SignInPage() {
   const searchParams = useSearchParams()
   const callbackUrl = searchParams.get('callbackUrl') || '/'
+  const [error, setError] = useState<string | null>(null)
+  const [isLoading, setIsLoading] = useState(false)
+
+  const handleSignIn = async () => {
+    try {
+      setIsLoading(true)
+      setError(null)
+      const result = await signIn('google', { callbackUrl })
+      if (result?.error) {
+        setError('ログインに失敗しました。もう一度お試しください。')
+        // エラーをログに記録
+        fetch('/api/auth/error', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ error: result.error, url: window.location.href })
+        })
+      }
+    } catch (err) {
+      setError('予期しないエラーが発生しました。')
+      console.error('Sign in error:', err)
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-50 to-purple-50 p-4">
@@ -20,11 +46,18 @@ export default function SignInPage() {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
+          {error && (
+            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md flex items-center gap-2">
+              <AlertCircle className="h-4 w-4" />
+              <span className="text-sm">{error}</span>
+            </div>
+          )}
           <Button
-            onClick={() => signIn('google', { callbackUrl })}
+            onClick={handleSignIn}
             className="w-full"
             size="lg"
             variant="outline"
+            disabled={isLoading}
           >
             <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
               <path
@@ -44,7 +77,7 @@ export default function SignInPage() {
                 d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
               />
             </svg>
-            Googleでログイン
+            {isLoading ? 'ログイン中...' : 'Googleでログイン'}
           </Button>
           
           <div className="text-center text-sm text-gray-600">
