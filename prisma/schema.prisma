@@ -27,5 +27,5 @@ model FortuneHistory {
   advice     String
   createdAt  DateTime @default(now())
 
-  @@unique([bloodType, zodiac, animal, date])
+  @@unique([bloodType, zodiac, animal, date], name: "bloodType_zodiac_animal_date")
 }

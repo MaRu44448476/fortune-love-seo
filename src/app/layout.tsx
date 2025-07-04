@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import SessionProvider from "@/components/SessionProvider";
 import StructuredData from "@/components/StructuredData";
 import PerformanceOptimizer from "@/components/PerformanceOptimizer";
 import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
@@ -98,14 +97,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <SessionProvider>
-          <PerformanceOptimizer />
-          <ServiceWorkerRegistration />
-          <GoogleAnalytics />
-          {children}
-          <Analytics />
-          <SpeedInsights />
-        </SessionProvider>
+        <PerformanceOptimizer />
+        <ServiceWorkerRegistration />
+        <GoogleAnalytics />
+        {children}
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

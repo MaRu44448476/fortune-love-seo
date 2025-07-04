@@ -13,12 +13,7 @@
     "db:migrate": "prisma migrate deploy",
     "db:seed": "tsx prisma/seed.ts",
     "db:reset": "prisma migrate reset --force",
-    "type-check": "tsc --noEmit",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
-    "test:ci": "jest --ci --coverage --watchAll=false",
-    "test:integration": "npm run type-check && npm run lint && npm run test:ci"
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@prisma/client": "^6.10.1",
