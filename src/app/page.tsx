@@ -295,22 +295,6 @@ function FortuneResult({ bloodType, zodiac, animal, onReset }: {
           >
             もう一度占う
           </motion.button>
-          
-          {/* Premium Features Promotion */}
-          <div className="grid grid-cols-2 gap-3">
-            <Link
-              href="/analysis"
-              className="bg-gradient-to-r from-purple-100 to-pink-100 border-2 border-purple-200 text-purple-700 px-4 py-3 rounded-2xl text-center font-semibold hover:border-purple-300 hover:shadow-md transition-all"
-            >
-              🔮 詳細分析
-            </Link>
-            <Link
-              href="/weekly"
-              className="bg-gradient-to-r from-indigo-100 to-purple-100 border-2 border-indigo-200 text-indigo-700 px-4 py-3 rounded-2xl text-center font-semibold hover:border-indigo-300 hover:shadow-md transition-all"
-            >
-              📅 週間占い
-            </Link>
-          </div>
         </div>
       </div>
     </motion.div>

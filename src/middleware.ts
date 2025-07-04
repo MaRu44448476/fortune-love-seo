@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
-import { getToken } from 'next-auth/jwt'
 
 // レート制限用のマップ
 const rateLimit = new Map()
@@ -16,7 +15,6 @@ const RATE_LIMIT_CONFIG = {
 const API_LIMITS = {
   '/api/fortune': { windowMs: 60 * 1000, maxRequests: 10 }, // 1分間に10回
   '/api/ranking': { windowMs: 60 * 1000, maxRequests: 20 }, // 1分間に20回
-  '/api/checkout': { windowMs: 60 * 1000, maxRequests: 5 }, // 1分間に5回
   '/api/og': { windowMs: 60 * 1000, maxRequests: 30 }, // 1分間に30回
 }
 
@@ -80,7 +78,7 @@ export async function middleware(request: NextRequest) {
     )
     response.headers.set(
       'Content-Security-Policy',
-      "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://js.stripe.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://api.stripe.com https://www.google-analytics.com; frame-src https://js.stripe.com;"
+      "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://www.google-analytics.com;"
     )
   }
 
@@ -105,34 +103,6 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  // 認証が必要なページの保護
-  const protectedPaths = ['/premium', '/analysis', '/weekly', '/profile']
-  const isProtectedPath = protectedPaths.some(path => pathname.startsWith(path))
-  
-  if (isProtectedPath) {
-    const token = await getToken({ req: request })
-    
-    if (!token) {
-      const url = request.nextUrl.clone()
-      url.pathname = '/auth/signin'
-      url.searchParams.set('callbackUrl', pathname)
-      return NextResponse.redirect(url)
-    }
-  }
-
-  // プレミアム機能の保護
-  const premiumPaths = ['/analysis', '/weekly']
-  const isPremiumPath = premiumPaths.some(path => pathname.startsWith(path))
-  
-  if (isPremiumPath) {
-    const token = await getToken({ req: request })
-    
-    if (token && !token.isPremium) {
-      const url = request.nextUrl.clone()
-      url.pathname = '/premium'
-      return NextResponse.redirect(url)
-    }
-  }
 
   return response
 }
