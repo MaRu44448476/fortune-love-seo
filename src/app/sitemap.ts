@@ -74,10 +74,6 @@ function generateFortunePages(): MetadataRoute.Sitemap {
   return fortunePages
 }
 
-// 今日の日付を取得
-function getTodayString(): string {
-  return new Date().toISOString().split('T')[0]
-}
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const today = new Date()

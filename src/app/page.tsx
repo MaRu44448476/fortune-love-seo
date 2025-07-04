@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import React from 'react'
-import type { Metadata } from 'next'
 import { motion } from 'framer-motion'
 import { Heart, Star, Sparkles } from 'lucide-react'
 import Header from '@/components/Header'
