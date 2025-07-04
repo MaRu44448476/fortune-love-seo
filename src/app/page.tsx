@@ -6,6 +6,7 @@ import type { Metadata } from 'next'
 import { motion } from 'framer-motion'
 import { Heart, Star, Sparkles } from 'lucide-react'
 import Header from '@/components/Header'
+import FortuneLoading from '@/components/FortuneLoading'
 import { type BloodType, type Zodiac, type Animal, generateFortune } from '@/lib/fortune'
 import Link from 'next/link'
 
@@ -18,39 +19,60 @@ export default function Home() {
   const [zodiac, setZodiac] = useState<Zodiac | ''>('')
   const [animal, setAnimal] = useState<Animal | ''>('')
   const [showResult, setShowResult] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleSubmit = () => {
     if (bloodType && zodiac && animal) {
-      setShowResult(true)
+      setIsLoading(true)
+      
+      // ローディング画面を2.5-3.5秒表示（演出的な効果）
+      const loadingTime = 2500 + Math.random() * 1000
+      
+      setTimeout(() => {
+        setIsLoading(false)
+        setShowResult(true)
+      }, loadingTime)
     }
   }
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-100 via-purple-50 to-indigo-100">
-      <Header />
-      {/* Header */}
-      <header className="pt-8 pb-4 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="relative"
-        >
-          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
-            ✨ 恋愛占い ✨
-          </h1>
-          <p className="text-lg text-gray-600 mt-2">血液型 × 星座 × 干支で占う今日の恋愛運</p>
-          <div className="absolute -top-2 -right-8 animate-pulse">
-            <Heart className="w-6 h-6 text-pink-400" />
-          </div>
-          <div className="absolute -bottom-2 -left-8 animate-bounce">
-            <Star className="w-5 h-5 text-yellow-400" />
-          </div>
-        </motion.div>
-      </header>
+  const handleReset = () => {
+    setShowResult(false)
+    setIsLoading(false)
+    setBloodType('')
+    setZodiac('')
+    setAnimal('')
+  }
 
-      <main className="container mx-auto px-4 py-8">
-        {!showResult ? (
+  return (
+    <>
+      {isLoading ? (
+        <FortuneLoading />
+      ) : (
+        <div className="min-h-screen bg-gradient-to-br from-pink-100 via-purple-50 to-indigo-100">
+          <Header />
+          {/* Header */}
+          <header className="pt-8 pb-4 text-center">
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="relative"
+            >
+              <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
+                ✨ 恋愛占い ✨
+              </h1>
+              <p className="text-lg text-gray-600 mt-2">血液型 × 星座 × 干支で占う今日の恋愛運</p>
+              <div className="absolute -top-2 -right-8 animate-pulse">
+                <Heart className="w-6 h-6 text-pink-400" />
+              </div>
+              <div className="absolute -bottom-2 -left-8 animate-bounce">
+                <Star className="w-5 h-5 text-yellow-400" />
+              </div>
+            </motion.div>
+          </header>
+
+          <main className="container mx-auto px-4 py-8">
+            {!showResult ? (
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -121,10 +143,12 @@ export default function Home() {
             </div>
           </motion.div>
         ) : (
-          <FortuneResult bloodType={bloodType as BloodType} zodiac={zodiac as Zodiac} animal={animal as Animal} onReset={() => setShowResult(false)} />
+          <FortuneResult bloodType={bloodType as BloodType} zodiac={zodiac as Zodiac} animal={animal as Animal} onReset={handleReset} />
         )}
       </main>
-    </div>
+        </div>
+      )}
+    </>
   )
 }
 
